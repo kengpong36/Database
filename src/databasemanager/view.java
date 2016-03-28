@@ -19,7 +19,7 @@ public class view extends javax.swing.JFrame {
     public DefaultTableModel listModel;
     public String Quert;
     public ResultSet rs;
-    public String state;
+    public String state = "Add";
     public String click;
 
     public view() {
@@ -319,7 +319,8 @@ public class view extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         try {
-
+            
+            //เช็ค state เป็น Add หรือ Update
             switch (state) {
                 case "Add":
                     Quert = "INSERT INTO STUDENTS(FIRST_NAME , LAST_NAME , "
@@ -334,7 +335,8 @@ public class view extends javax.swing.JFrame {
                                 "ID", "FullName", "Address"
                             }
                     ));
-
+                    
+                    //340-352 เป็นการเรียกข้อมูลใน Database อีกรอบหลังจากมีการเพิ่ม
                     Quert = "SELECT*FROM STUDENTS ";
 
                     rs = statement.executeQuery(Quert);
@@ -375,7 +377,8 @@ public class view extends javax.swing.JFrame {
                                 "ID", "FullName", "Address"
                             }
                     ));
-
+                    
+                     //382-394 เป็นการเรียกข้อมูลใน Database อีกรอบหลังจากมีการ Update
                     Quert = "SELECT*FROM STUDENTS ";
 
                     rs = statement.executeQuery(Quert);
@@ -403,7 +406,8 @@ public class view extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-
+        
+        //เซท list ใหม่ทุกครั้งเมื่อ ค้นหา เพื่อไม่ให้ได้ชุดข้อมูลซ้ำ
         listoFStudents.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{
@@ -411,7 +415,7 @@ public class view extends javax.swing.JFrame {
                 }
         ));
         try {
-
+            //Like %ข้อความ% คือ ช้อความอยู่ตำแหน่งไหนก็ได้ %แทนตำแหน่ง
             Quert = "SELECT*FROM STUDENTS WHERE FIRST_NAME LIKE '%" + txt_search.getText() + "%'";
 
             rs = statement.executeQuery(Quert);
@@ -436,8 +440,10 @@ public class view extends javax.swing.JFrame {
 
         click = "";
         try {
-
+            
+            //ให้ row เก็บ record ที่เลือก รูปแบบ Object
             int row = listoFStudents.getSelectedRow();
+            //ให้ click แปลงค่า row เป็น String 
             click = (listoFStudents.getModel().getValueAt(row, 0).toString());
 
             Quert = "select * from STUDENTS WHERE ID=" + click + " ";
@@ -528,7 +534,7 @@ public class view extends javax.swing.JFrame {
             txt_Address.setText("");
             txt_first_name.setText("");
             txt_last_name.setText("");
-
+            state= "Add";
         } catch (SQLException e) {
             System.out.println(e);
         }
