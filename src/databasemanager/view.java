@@ -67,6 +67,7 @@ public class view extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         txt_search = new javax.swing.JTextField();
+        cblist = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         txt_Address = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -160,38 +161,41 @@ public class view extends javax.swing.JFrame {
             }
         });
 
+        cblist.setFont(new java.awt.Font("TH Charmonman", 3, 18)); // NOI18N
+        cblist.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ชื่อ-นามสกุล", "ที่อยู่", " " }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
+                        .addGap(34, 34, 34)
+                        .addComponent(cblist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSearch)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(105, 105, 105))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch)
+                    .addComponent(cblist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnAdd)
@@ -465,34 +469,67 @@ public class view extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        btnSearch.setEnabled(true);
-        btnSearch.setBackground(new java.awt.Color(255, 204, 102));
-        //เซท list ใหม่ทุกครั้งเมื่อ ค้นหา เพื่อไม่ให้ได้ชุดข้อมูลซ้ำ
-        listoFStudents.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{},
-                new String[]{
-                    "ไอดี", "ชื่อ-นามสกุล", "ที่อยู่"
+        System.out.println(cblist.getSelectedIndex());
+
+        if (cblist.getSelectedIndex() == 0) {
+            btnSearch.setEnabled(true);
+            btnSearch.setBackground(new java.awt.Color(255, 204, 102));
+            //เซท list ใหม่ทุกครั้งเมื่อ ค้นหา เพื่อไม่ให้ได้ชุดข้อมูลซ้ำ
+            listoFStudents.setModel(new javax.swing.table.DefaultTableModel(
+                    new Object[][]{},
+                    new String[]{
+                        "ไอดี", "ชื่อ-นามสกุล", "ที่อยู่"
+                    }
+            ));
+            try {
+                //Like %ข้อความ% คือ ช้อความอยู่ตำแหน่งไหนก็ได้ %แทนตำแหน่ง
+                Quert = "SELECT*FROM STUDENTS WHERE FIRST_NAME LIKE '%" + txt_search.getText() + "%' "
+                        + " OR LAST_NAME LIKE '%" + txt_search.getText() + "%' ";
+                rs = statement.executeQuery(Quert);
+
+                listModel = (DefaultTableModel) this.listoFStudents.getModel();
+
+                while (rs.next()) {
+
+                    listModel.addRow(new Object[]{rs.getInt("ID"), rs.getString("FIRST_NAME") + "   " + rs.getString("LAST_NAME"), rs.getString("ADDRESS")});
+
                 }
-        ));
-        try {
-            //Like %ข้อความ% คือ ช้อความอยู่ตำแหน่งไหนก็ได้ %แทนตำแหน่ง
-            Quert = "SELECT*FROM STUDENTS WHERE FIRST_NAME LIKE '%" + txt_search.getText() + "%' "
-                    + " OR LAST_NAME LIKE '%" + txt_search.getText() + "%' ";
-            rs = statement.executeQuery(Quert);
 
-            listModel = (DefaultTableModel) this.listoFStudents.getModel();
+                listoFStudents.setModel(listModel);
 
-            while (rs.next()) {
-
-                listModel.addRow(new Object[]{rs.getInt("ID"), rs.getString("FIRST_NAME") + "   " + rs.getString("LAST_NAME"), rs.getString("ADDRESS")});
-
+            } catch (SQLException ex) {
+                Logger.getLogger(view.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else {
+            btnSearch.setEnabled(true);
+            btnSearch.setBackground(new java.awt.Color(255, 204, 102));
+            //เซท list ใหม่ทุกครั้งเมื่อ ค้นหา เพื่อไม่ให้ได้ชุดข้อมูลซ้ำ
+            listoFStudents.setModel(new javax.swing.table.DefaultTableModel(
+                    new Object[][]{},
+                    new String[]{
+                        "ไอดี", "ชื่อ-นามสกุล", "ที่อยู่"
+                    }
+            ));
+            try {
+                //Like %ข้อความ% คือ ช้อความอยู่ตำแหน่งไหนก็ได้ %แทนตำแหน่ง
+                Quert = "SELECT*FROM STUDENTS WHERE ADDRESS LIKE '%" + txt_search.getText() + "%'";
+                rs = statement.executeQuery(Quert);
 
-            listoFStudents.setModel(listModel);
+                listModel = (DefaultTableModel) this.listoFStudents.getModel();
 
-        } catch (SQLException ex) {
-            Logger.getLogger(view.class.getName()).log(Level.SEVERE, null, ex);
+                while (rs.next()) {
+
+                    listModel.addRow(new Object[]{rs.getInt("ID"), rs.getString("FIRST_NAME") + "   " + rs.getString("LAST_NAME"), rs.getString("ADDRESS")});
+
+                }
+
+                listoFStudents.setModel(listModel);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(view.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
 
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -681,6 +718,7 @@ public class view extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cblist;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
