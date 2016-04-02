@@ -124,26 +124,26 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="jScrollPane2" min="-2" pref="402" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnAdd" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnUpdate" max="32767" attributes="0"/>
                                       <Component id="btnDelete" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="btnAdd" max="32767" attributes="0"/>
+                                      <Component id="btnUpdate" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="txt_search" min="-2" pref="179" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                   <Component id="cblist" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -152,7 +152,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSearch" alignment="3" max="-2" attributes="0"/>
                               <Component id="cblist" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txt_search" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -240,7 +240,7 @@
                       <Color blue="66" green="cc" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="TH Charmonman" size="18" style="1"/>
+                      <Font name="TH Charmonman" size="24" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&#xe40;&#xe1e;&#xe34;&#xe48;&#xe21;"/>
                   </Properties>
@@ -254,7 +254,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="TH Charmonman" size="18" style="1"/>
+                      <Font name="TH Charmonman" size="24" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&#xe2d;&#xe31;&#xe1e;&#xe40;&#xe14;&#xe17;"/>
                   </Properties>
@@ -268,7 +268,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="TH Charmonman" size="18" style="1"/>
+                      <Font name="TH Charmonman" size="24" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&#xe25;&#xe1a;"/>
                   </Properties>
@@ -282,9 +282,10 @@
                       <Color blue="66" green="cc" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="TH Charmonman" size="18" style="1"/>
+                      <Font name="TH Charmonman" size="24" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&#xe04;&#xe49;&#xe19;&#xe2b;&#xe32;"/>
+                    <Property name="horizontalTextPosition" type="int" value="0"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
@@ -294,6 +295,9 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="cblist">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="cc" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="TH Charmonman" size="18" style="3"/>
                     </Property>
@@ -421,7 +425,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="TH Charmonman" size="18" style="1"/>
+                      <Font name="TH Charmonman" size="24" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&#xe1a;&#xe31;&#xe19;&#xe17;&#xe36;&#xe01;"/>
                   </Properties>
@@ -435,7 +439,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="TH Charmonman" size="18" style="1"/>
+                      <Font name="TH Charmonman" size="24" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="&#xe22;&#xe01;&#xe40;&#xe25;&#xe34;&#xe01;"/>
                   </Properties>

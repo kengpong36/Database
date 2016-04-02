@@ -126,7 +126,7 @@ public class view extends javax.swing.JFrame {
         }
 
         btnAdd.setBackground(new java.awt.Color(255, 204, 102));
-        btnAdd.setFont(new java.awt.Font("TH Charmonman", 1, 18)); // NOI18N
+        btnAdd.setFont(new java.awt.Font("TH Charmonman", 1, 24)); // NOI18N
         btnAdd.setText("เพิ่ม");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +135,7 @@ public class view extends javax.swing.JFrame {
         });
 
         btnUpdate.setBackground(new java.awt.Color(255, 255, 255));
-        btnUpdate.setFont(new java.awt.Font("TH Charmonman", 1, 18)); // NOI18N
+        btnUpdate.setFont(new java.awt.Font("TH Charmonman", 1, 24)); // NOI18N
         btnUpdate.setText("อัพเดท");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +144,7 @@ public class view extends javax.swing.JFrame {
         });
 
         btnDelete.setBackground(new java.awt.Color(255, 255, 255));
-        btnDelete.setFont(new java.awt.Font("TH Charmonman", 1, 18)); // NOI18N
+        btnDelete.setFont(new java.awt.Font("TH Charmonman", 1, 24)); // NOI18N
         btnDelete.setText("ลบ");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,14 +153,16 @@ public class view extends javax.swing.JFrame {
         });
 
         btnSearch.setBackground(new java.awt.Color(255, 204, 102));
-        btnSearch.setFont(new java.awt.Font("TH Charmonman", 1, 18)); // NOI18N
+        btnSearch.setFont(new java.awt.Font("TH Charmonman", 1, 24)); // NOI18N
         btnSearch.setText("ค้นหา");
+        btnSearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
+        cblist.setBackground(new java.awt.Color(255, 204, 102));
         cblist.setFont(new java.awt.Font("TH Charmonman", 3, 18)); // NOI18N
         cblist.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ชื่อ-นามสกุล", "ที่อยู่", " " }));
 
@@ -170,22 +172,22 @@ public class view extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(cblist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnSearch)
-                        .addGap(105, 105, 105))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +221,7 @@ public class view extends javax.swing.JFrame {
         jLabel3.setText("ที่อยู่ :");
 
         btnSave.setBackground(new java.awt.Color(255, 255, 255));
-        btnSave.setFont(new java.awt.Font("TH Charmonman", 1, 18)); // NOI18N
+        btnSave.setFont(new java.awt.Font("TH Charmonman", 1, 24)); // NOI18N
         btnSave.setText("บันทึก");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +230,7 @@ public class view extends javax.swing.JFrame {
         });
 
         btnCancel.setBackground(new java.awt.Color(255, 255, 255));
-        btnCancel.setFont(new java.awt.Font("TH Charmonman", 1, 18)); // NOI18N
+        btnCancel.setFont(new java.awt.Font("TH Charmonman", 1, 24)); // NOI18N
         btnCancel.setText("ยกเลิก");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -367,19 +369,28 @@ public class view extends javax.swing.JFrame {
                     ));
 
                     //340-352 เป็นการเรียกข้อมูลใน Database อีกรอบหลังจากมีการเพิ่ม
-                    Quert = "SELECT*FROM STUDENTS ";
+                    try {
+                        if (txt_search.getText().toString().equals("")) {
 
-                    rs = statement.executeQuery(Quert);
+                        } else {
+                            //Like %ข้อความ% คือ ช้อความอยู่ตำแหน่งไหนก็ได้ %แทนตำแหน่ง
+                            Quert = "SELECT*FROM STUDENTS WHERE FIRST_NAME LIKE '%" + txt_search.getText() + "%' "
+                                    + " OR LAST_NAME LIKE '%" + txt_search.getText() + "%' ";
+                            rs = statement.executeQuery(Quert);
 
-                    listModel = (DefaultTableModel) this.listoFStudents.getModel();
+                            listModel = (DefaultTableModel) this.listoFStudents.getModel();
 
-                    while (rs.next()) {
+                            while (rs.next()) {
 
-                        listModel.addRow(new Object[]{rs.getInt("ID"), rs.getString("FIRST_NAME") + "   " + rs.getString("LAST_NAME"), rs.getString("ADDRESS")});
+                                listModel.addRow(new Object[]{rs.getInt("ID"), rs.getString("FIRST_NAME") + "   " + rs.getString("LAST_NAME"), rs.getString("ADDRESS")});
 
+                            }
+
+                            listoFStudents.setModel(listModel);
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(view.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-                    listoFStudents.setModel(listModel);
 
                     JOptionPane.showMessageDialog(null, "เพิ่มข้อมูลสำเร็จ", null, JOptionPane.INFORMATION_MESSAGE);
 
@@ -469,7 +480,7 @@ public class view extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        System.out.println(cblist.getSelectedIndex());
+        
 
         if (cblist.getSelectedIndex() == 0) {
             btnSearch.setEnabled(true);
@@ -482,21 +493,24 @@ public class view extends javax.swing.JFrame {
                     }
             ));
             try {
-                //Like %ข้อความ% คือ ช้อความอยู่ตำแหน่งไหนก็ได้ %แทนตำแหน่ง
-                Quert = "SELECT*FROM STUDENTS WHERE FIRST_NAME LIKE '%" + txt_search.getText() + "%' "
-                        + " OR LAST_NAME LIKE '%" + txt_search.getText() + "%' ";
-                rs = statement.executeQuery(Quert);
+                if (txt_search.getText().toString().equals("")) {
 
-                listModel = (DefaultTableModel) this.listoFStudents.getModel();
+                } else {
+                    //Like %ข้อความ% คือ ช้อความอยู่ตำแหน่งไหนก็ได้ %แทนตำแหน่ง
+                    Quert = "SELECT*FROM STUDENTS WHERE FIRST_NAME LIKE '%" + txt_search.getText() + "%' "
+                            + " OR LAST_NAME LIKE '%" + txt_search.getText() + "%' ";
+                    rs = statement.executeQuery(Quert);
 
-                while (rs.next()) {
+                    listModel = (DefaultTableModel) this.listoFStudents.getModel();
 
-                    listModel.addRow(new Object[]{rs.getInt("ID"), rs.getString("FIRST_NAME") + "   " + rs.getString("LAST_NAME"), rs.getString("ADDRESS")});
+                    while (rs.next()) {
 
+                        listModel.addRow(new Object[]{rs.getInt("ID"), rs.getString("FIRST_NAME") + "   " + rs.getString("LAST_NAME"), rs.getString("ADDRESS")});
+
+                    }
+
+                    listoFStudents.setModel(listModel);
                 }
-
-                listoFStudents.setModel(listModel);
-
             } catch (SQLException ex) {
                 Logger.getLogger(view.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -536,9 +550,37 @@ public class view extends javax.swing.JFrame {
     private void listoFStudentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listoFStudentsMouseClicked
 
         click = "";
+
         try {
 
-            //ให้ row เก็บ record ที่เลือก รูปแบบ Object
+            state = "Update";
+//            txt_Address.setEnabled(true);
+//            txt_first_name.setEnabled(true);
+//            txt_last_name.setEnabled(true);
+
+            btnDelete.setEnabled(true);
+            btnDelete.setBackground(new java.awt.Color(255, 204, 102));
+            btnUpdate.setEnabled(true);
+            btnUpdate.setBackground(new java.awt.Color(255, 204, 102));
+//            btnSave.setEnabled(true);
+//            btnSave.setBackground(new java.awt.Color(255, 204, 102));
+//            btnCancel.setEnabled(true);
+//            btnCancel.setBackground(new java.awt.Color(255, 204, 102));
+            btnAdd.setEnabled(false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_listoFStudentsMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+
+        listoFStudents.setEnabled(true);
+
+        state = "Update";
+
+        try {
+
+//ให้ row เก็บ record ที่เลือก รูปแบบ Object
             int row = listoFStudents.getSelectedRow();
             //ให้ click แปลงค่า row เป็น String 
             click = (listoFStudents.getModel().getValueAt(row, 0).toString());
@@ -553,41 +595,21 @@ public class view extends javax.swing.JFrame {
                 txt_last_name.setText(rs.getString("LAST_NAME"));
                 txt_Address.setText(rs.getString("ADDRESS"));
             }
-            state = "Update";
+
             txt_Address.setEnabled(true);
             txt_first_name.setEnabled(true);
             txt_last_name.setEnabled(true);
 
-            btnDelete.setEnabled(true);
-            btnDelete.setBackground(new java.awt.Color(255, 204, 102));
             btnUpdate.setEnabled(true);
             btnUpdate.setBackground(new java.awt.Color(255, 204, 102));
             btnSave.setEnabled(true);
             btnSave.setBackground(new java.awt.Color(255, 204, 102));
             btnCancel.setEnabled(true);
             btnCancel.setBackground(new java.awt.Color(255, 204, 102));
-            btnAdd.setEnabled(false);
-        } catch (Exception e) {
-            System.out.println(e);
+            btnDelete.setEnabled(false);
+        } catch (SQLException o) {
+
         }
-    }//GEN-LAST:event_listoFStudentsMouseClicked
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-
-        listoFStudents.setEnabled(true);
-
-        state = "Update";
-        txt_Address.setEnabled(true);
-        txt_first_name.setEnabled(true);
-        txt_last_name.setEnabled(true);
-
-        btnUpdate.setEnabled(true);
-        btnUpdate.setBackground(new java.awt.Color(255, 204, 102));
-        btnSave.setEnabled(true);
-        btnSave.setBackground(new java.awt.Color(255, 204, 102));
-        btnCancel.setEnabled(true);
-        btnCancel.setBackground(new java.awt.Color(255, 204, 102));
-
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -633,11 +655,7 @@ public class view extends javax.swing.JFrame {
 
                     listModel = (DefaultTableModel) this.listoFStudents.getModel();
 
-                    while (rs.next()) {
-
-                        listModel.addRow(new Object[]{rs.getInt("ID"), rs.getString("FIRST_NAME") + "   " + rs.getString("LAST_NAME"), rs.getString("ADDRESS")});
-
-                    }
+                    
 
                     listoFStudents.setModel(listModel);
 
